@@ -25,6 +25,17 @@ public class Carte {
     protected TypeCarte type;
 
     @Override
+    public boolean equals(Object obj) {
+        Carte carteParam = (Carte) obj;
+        
+        if (this.getType()==carteParam.getType()){
+            return true;
+    }else{
+         return false;       
+    }
+    }
+    
+    @Override
     public String toString() {
 //        return super.toString(); //To change body of generated methods, choose Tools | Templates.
         return this.type.toString();

@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class Jeu {
 
-    protected ArrayList<Joueur> joueurs = new ArrayList<>();
-    protected Joueur joueurEnCours;
+    private ArrayList<Joueur> joueurs = new ArrayList<>();
+    private Joueur joueurEnCours;
 
     public void afficherMenuPrincipal() {
 
@@ -122,30 +122,36 @@ public class Jeu {
 
     public void menuAction() {
 
-        //1. Afficher le menu
-        System.out.println("A vous de joueur : " + this.joueurEnCours.getNom());
-        System.out.println("Vos cartes : " + this.joueurEnCours.getCartes());
+        boolean termine = false;
+        do {
 
-        System.out.println("2: Passer son tour");
-        System.out.println("1: Lancer sort");
+            //1. Afficher le menu
+            System.out.println("A vous de joueur : " + this.joueurEnCours.getNom());
+            System.out.println("Vos cartes : " + this.joueurEnCours.getCartes());
 
-        // Saisie clavier
-        // String choix = new Scanner(System.in).nextLine();
-        // (soit l'une ou l'autre des phrases)
-        Scanner scanner = new Scanner(System.in);
-        String choix = scanner.nextLine();
+            System.out.println("1: Lancer sort");
+            System.out.println("2: Passer son tour");
 
-        //2. Passer sort ou passer tour
-        switch (choix) {
-            case "1":
-                this.lancerSort();
-                break;
-            case "2":
-                this.passerTour();
-                break;
-            default:
-                break;
-        }
+            // Saisie clavier
+            // String choix = new Scanner(System.in).nextLine();
+            // (soit l'une ou l'autre des phrases)
+            Scanner scanner = new Scanner(System.in);
+            String choix = scanner.nextLine();
+
+            //2. Passer sort ou passer tour
+            switch (choix) {
+                case "1":
+                    this.lancerSort();
+                    termine = true;
+                    break;
+                case "2":
+                    this.passerTour();
+                    termine = true;
+                    break;
+                default:
+                    break;
+            }
+        } while (termine == false);
     }
 
     public void passerTour() {
@@ -154,5 +160,92 @@ public class Jeu {
 
     public void lancerSort() {
 
+        boolean termine = false;
+        while (termine == false) {
+            //1. Afficher les différent sorts possibles que le joueur peut lancer
+            Carte carteCorneLicorne = new Carte();
+            Carte carteBaveCrapaud = new Carte();
+            Carte carteMandragore = new Carte();
+            Carte carteAilesCSS = new Carte();
+            Carte carteLapisLazuli = new Carte();
+
+            carteCorneLicorne.setType(Carte.TypeCarte.CORNE_DE_LICORNE);
+            carteBaveCrapaud.setType(Carte.TypeCarte.BAVE_DE_CRAPAUD);
+            carteMandragore.setType(Carte.TypeCarte.MANDRAGORE);
+            carteAilesCSS.setType(Carte.TypeCarte.AILE_DE_CHAUVE_SOURIS);
+            carteLapisLazuli.setType(Carte.TypeCarte.LAPIS_LAZULI);
+
+            if (this.joueurEnCours.getCartes().contains(carteCorneLicorne)
+                    && this.joueurEnCours.getCartes().contains(carteBaveCrapaud)) {
+                System.out.println("[1] Invisbilité");
+            }
+            if (this.joueurEnCours.getCartes().contains(carteCorneLicorne)
+                    && this.joueurEnCours.getCartes().contains(carteMandragore)) {
+                System.out.println("[2] Philtre d'amour");
+            }
+            if (this.joueurEnCours.getCartes().contains(carteBaveCrapaud)
+                    && this.joueurEnCours.getCartes().contains(carteLapisLazuli)) {
+                System.out.println("[3] Hypnose");
+            }
+            if (this.joueurEnCours.getCartes().contains(carteLapisLazuli)
+                    && this.joueurEnCours.getCartes().contains(carteAilesCSS)) {
+                System.out.println("[4] Divinité");
+            }
+            if (this.joueurEnCours.getCartes().contains(carteMandragore)
+                    && this.joueurEnCours.getCartes().contains(carteBaveCrapaud)) {
+                System.out.println("[5] Sommeil profond");
+            }
+
+            //2. Saisi sort à lancer
+            //Saisie clavier
+            //String choix = new Scanner(System.in).nextLine();
+            //(soit l'une ou l'autre des frases)
+            Scanner scanner = new Scanner(System.in);
+            String choix = scanner.nextLine();
+
+            switch (choix) {
+                case "1":
+              sortIvisibilite();
+                    break;
+                case "2":
+                  sortPhiltreAmour();
+                    break;
+                case "3":
+                   sortHypnose();
+                    break;
+                case "4":
+                    sortDivination();
+                    break;
+                case "5":
+                     sortSommeilProfond();
+                    break;
+                default:
+                    System.out.println("Ce sort n'existe pas");
+                    break;
+            }
+        }
+
+        //3. Lancement du sort
+        //4. Supprime les 2 cartes ayant permis de lancer sort
+    }
+
+    private void sortSommeilProfond() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void sortDivination() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void sortHypnose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void sortPhiltreAmour() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void sortIvisibilite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
